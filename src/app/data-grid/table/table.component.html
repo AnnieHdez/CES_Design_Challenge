@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+        <table class="table table-striped table-bordered table-hover addMargin">
+            <thead  class="thead-dark">
+                <tr>					
+                    <th *ngFor="let header of collection.columnsNames,let i=index"   
+                        [style.width.%]="collection.columnsWidths[i]">
+                            {{ header | titlecase }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of collection.data | paginate:{itemsPerPage: recordsPerColum, currentPage:p}">					
+                    <!-- <td>{{item.name}}</td>					
+                    <td>{{item.address}}</td>
+                    <td>{{item.skills}}</td> -->
+                    <td *ngFor="let header of collection.columnsNames, let i = index" [ngClass]="{'text-center':collection.columnsTypes[i]=='boolean'}">                  
+                        <app-table-cell *ngIf=":collection.columnsTypes[i]!='boolean'" [value]='item[header]'></app-table-cell>
+                        <app-boolean-cell *ngIf=":collection.columnsTypes[i]=='boolean'" [value]= 'item[header]'></app-boolean-cell>
+                    </td>					
+                </tr>		
+            </tbody>
+        </table>   
+    </div>
+</div>
