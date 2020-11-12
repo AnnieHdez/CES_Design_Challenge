@@ -10,9 +10,15 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of collection | paginate:{itemsPerPage: recordsPerColum, currentPage:p}">					
-                    <td *ngFor="let header of columnsNames, let i = index" [ngClass]="{'text-center':columnsTypes[i]=='boolean'}">  
-                        <app-table-cell *ngIf="columnsTypes[i]!='boolean'" [value]='item[header]'></app-table-cell>
-                        <app-boolean-cell *ngIf="columnsTypes[i]=='boolean'" [value]= 'item[header]'></app-boolean-cell>
+                    <td *ngFor="let header of columnsNames, let i = index" 
+                    [ngClass]="{'text-center':columnsTypes[i]=='boolean'}"
+                    [ngSwitch]='columnsTypes[i]'>  
+                        <p *ngSwitchCase="'date'">{{ item[header] | date}}</p>
+                        <p *ngSwitchCase="'currency'">{{ item[header] | currency}}</p>
+                        <p *ngSwitchCase="'percent'">{{ item[header] | percent}}</p>
+                        <p *ngSwitchCase="'number'">{{ item[header] | number}}</p>
+                        <input *ngSwitchCase="'boolean'" type="checkbox" class="editor-active" onclick="return false;" [checked]='item[header]'>
+                        <p *ngSwitchDefault>{{ item[header] }}</p>
                     </td>					
                 </tr>		
             </tbody>

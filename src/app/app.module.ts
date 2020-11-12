@@ -5,8 +5,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { DataGridComponent } from './data-grid/data-grid.component';
-import { TableCellComponent } from './data-grid/table/table-cell/table-cell.component';
-import { BooleanCellComponent } from './data-grid/table/boolean-cell/boolean-cell.component';
 import { TableComponent } from './data-grid/table/table.component';
 import { LoadingSpinerComponent } from './loading-spinner/loading-spinner.component';
 import { AlertComponent } from './alert/alert.component';
@@ -16,8 +14,6 @@ import { AlertComponent } from './alert/alert.component';
     AppComponent,
     TableComponent,
     DataGridComponent,
-    TableCellComponent,
-    BooleanCellComponent,
     LoadingSpinerComponent,
     AlertComponent
   ],
