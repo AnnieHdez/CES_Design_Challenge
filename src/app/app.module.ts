@@ -8,6 +8,8 @@ import { DataGridComponent } from './data-grid/data-grid.component';
 import { TableCellComponent } from './data-grid/table/table-cell/table-cell.component';
 import { BooleanCellComponent } from './data-grid/table/boolean-cell/boolean-cell.component';
 import { TableComponent } from './data-grid/table/table.component';
+import { LoadingSpinerComponent } from './loading-spinner/loading-spinner.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { TableComponent } from './data-grid/table/table.component';
     TableComponent,
     DataGridComponent,
     TableCellComponent,
-    BooleanCellComponent
+    BooleanCellComponent,
+    LoadingSpinerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

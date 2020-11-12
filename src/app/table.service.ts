@@ -12,7 +12,7 @@ export class TableService {
     private recordsPerColum: number;
     recordsPerColumChanged = new Subject<number>();
 
-    table: Table;
+    private table: Table;
     tableChanged = new Subject<Table>();
 
     getPage(){
@@ -31,6 +31,10 @@ export class TableService {
     updateRecord(newRecord: number){
       this.recordsPerColum = newRecord;
       this.recordsPerColumChanged.next(this.recordsPerColum);
+    }
+
+    getTable(){
+      return this.table;
     }
 
     updateTable(table){

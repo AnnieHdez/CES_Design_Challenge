@@ -11,25 +11,28 @@ import { TableService } from 'src/app/table.service';
 })
 export class TableComponent implements OnInit, OnDestroy {
   @Input() tableName: string;
-  @Input() collection: Table;
+  @Input() collection: Object[];
+  @Input() columnsNames: string[];
+  @Input() columnsTypes: string[] = [];
+  @Input() columnsWidths: number[] = [];
+
   numberOfColumns: number;
   private pageChangeSub: Subscription;
   private recordsChangeSub: Subscription;
   p : number;
   recordsPerColum: number;
   
-
-  
   constructor(private tableService: TableService) { }
 
   ngOnInit(): void {
-    this.p = this.tableService.getPage();
 
     this.pageChangeSub = this.tableService.changedPage.subscribe(
       (newPage)=>{
         this.p = newPage;
       }
     );
+
+    this.p = this.tableService.getPage();
 
     this.recordsPerColum =this.tableService.getRecord();
 
