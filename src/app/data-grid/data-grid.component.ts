@@ -19,6 +19,8 @@ export class DataGridComponent implements OnInit, OnDestroy {
   private pageChangeSub: Subscription;
   private recordsChangeSub: Subscription;
   private dataSub: Subscription;
+  private errorSub: Subscription;
+
   tableName: string;
   selectedTable: number = 0;
 
@@ -27,7 +29,7 @@ export class DataGridComponent implements OnInit, OnDestroy {
   columnsTypes: string[];
   columnsWidths: number[];
 
-  error = false;
+  error: boolean = false;
 
   production = true;
 
@@ -40,13 +42,13 @@ export class DataGridComponent implements OnInit, OnDestroy {
     this.fetchDataService.fetchData(this.production, this.tableName);
 
     this.dataSub = this.tableService.tableChanged.subscribe(
-      (newTable)=>{
+      newTable => {
         this.collection = newTable.data;
         this.columnsNames = newTable.columnsNames;
         this.columnsTypes = newTable.columnsTypes;
         this.columnsWidths = newTable.columnsWidths;
-      }
-    )
+      },
+    );
 
     this.tableService.updateRecord(this.numberOfRecords[0])
     this.recordsChangeSub = this.tableService.recordsPerColumChanged.subscribe(
@@ -60,6 +62,13 @@ export class DataGridComponent implements OnInit, OnDestroy {
         this.p = newPage;
       }
     );
+
+    this.errorSub = this.tableService.errorChanged.subscribe(
+      (error) => {
+        this.error = error;
+      }
+
+    )
   }
 
   toggleState(){
@@ -87,10 +96,17 @@ export class DataGridComponent implements OnInit, OnDestroy {
     this.fetchDataService.fetchData(this.production, this.tableName);
   }
 
+  onHandleError(){
+    this.tableService.setError();
+    this.production = false;
+    this.fetchDataService.fetchData(this.production, this.tableNames[0]);
+  }
+
   ngOnDestroy(): void{
     this.pageChangeSub.unsubscribe();
     this.recordsChangeSub.unsubscribe();
     this.dataSub.unsubscribe();
+    this.errorSub.unsubscribe();
   }
 
 }

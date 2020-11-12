@@ -15,6 +15,9 @@ export class TableService {
     private table: Table;
     tableChanged = new Subject<Table>();
 
+    private error: boolean = false;
+    errorChanged = new Subject<boolean>();
+
     getPage(){
       return this.p;
     }
@@ -41,6 +44,16 @@ export class TableService {
         this.table = table;
         console.log(table)
         this.tableChanged.next(this.table);
+    }
+
+    throwError(error){
+      this.error = true;
+      this.errorChanged.next(this.error);
+    }
+
+    setError(){
+      this.error = false;
+      this.errorChanged.next(this.error);
     }
 
 }

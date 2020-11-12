@@ -49,5 +49,5 @@
     </div>
 </div>
 
-<app-alert [message] ="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+<app-alert *ngIf="error" message ="An error has ocurred while loading the data." (close)="onHandleError()"></app-alert>
 

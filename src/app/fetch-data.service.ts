@@ -33,8 +33,11 @@ export class FetchDataService {
           )
           .subscribe( table =>{
             this.tableService.updateTable(table);
-            console.log(table);
-          });
+          },
+          error=>{
+            this.tableService.throwError(error);
+          }
+          );
         }
       else{
         if(table == 'table1')
