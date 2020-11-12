@@ -1,16 +1,15 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Table } from './table.model';
 
 @Injectable({providedIn: 'root'})
 export class TableService {
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
-    p: number = 1;
+    private p: number = 1;
     changedPage = new Subject<number>();
 
-    recordsPerColum: number;
+    private recordsPerColum: number;
     recordsPerColumChanged = new Subject<number>();
 
     table: Table;
