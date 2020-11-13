@@ -1,7 +1,6 @@
 import { Input, OnChanges, OnDestroy, TemplateRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Table } from 'src/app/shared/table.model';
 import { TableService } from 'src/app/shared/table.service';
 
 @Component({
@@ -43,8 +42,7 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
       (newRecord)=>{
         this.recordsPerColum = newRecord;
       }
-    );
-    
+    ); 
     this.ctx= {columnsNames: this.columnsNames, columnsWidths: this.columnsWidths};
   }
 
