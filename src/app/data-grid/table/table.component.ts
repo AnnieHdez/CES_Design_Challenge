@@ -1,4 +1,4 @@
-import { Input, OnDestroy } from '@angular/core';
+import { Input, OnChanges, OnDestroy, TemplateRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/shared/table.model';
@@ -9,12 +9,13 @@ import { TableService } from 'src/app/shared/table.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() tableName: string;
   @Input() collection: Object[];
   @Input() columnsNames: string[];
-  @Input() columnsTypes: string[] = [];
-  @Input() columnsWidths: number[] = [];
+  @Input() columnsTypes: string[];
+  @Input() columnsWidths: number[];
+  @Input() headerTemplate: TemplateRef<any>;
 
   private pageChangeSub: Subscription;
   private recordsChangeSub: Subscription;
@@ -22,11 +23,12 @@ export class TableComponent implements OnInit, OnDestroy {
   numberOfColumns: number;
   p : number;
   recordsPerColum: number;
+
+ ctx;
   
   constructor(private tableService: TableService) { }
 
   ngOnInit(): void {
-
     this.pageChangeSub = this.tableService.changedPage.subscribe(
       (newPage)=>{
         this.p = newPage;
@@ -42,6 +44,12 @@ export class TableComponent implements OnInit, OnDestroy {
         this.recordsPerColum = newRecord;
       }
     );
+    
+    this.ctx= {columnsNames: this.columnsNames, columnsWidths: this.columnsWidths};
+  }
+
+  ngOnChanges(){
+    this.ctx= {columnsNames: this.columnsNames, columnsWidths: this.columnsWidths};
   }
 
 
