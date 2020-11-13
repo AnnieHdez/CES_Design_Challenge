@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FetchDataService} from '../fetch-data.service';
-import { TableService } from '../table.service';
+import { FetchDataService} from '../shared/fetch-data.service';
+import { TableService } from '../shared/table.service';
 
 @Component({
   selector: 'app-data-grid',
@@ -9,7 +9,7 @@ import { TableService } from '../table.service';
   styleUrls: ['./data-grid.component.css']
 })
 export class DataGridComponent implements OnInit, OnDestroy {
-  @Input() tableNames: string[] = ["products","employees"];
+  @Input() prodTableNames: string[] = ["products","employees"];
   @Input() numberOfRecords: number[]  = [5,10,15];
 
   private dataSub: Subscription;
@@ -26,17 +26,20 @@ export class DataGridComponent implements OnInit, OnDestroy {
   numberOfColumns: number;
   error: boolean;
   production: boolean;
+  tableNames: string[];
+  mockTablesNames: string[] = ["table1", "table2"]; 
 
   constructor(private fetchDataService: FetchDataService, private tableService: TableService) { }
 
   ngOnInit(): void {
+    this.tableNames = this.prodTableNames;
     this.selectedTable = 0;
     this.error = false;
     this.production = true;
     this.tableName= this.tableNames[this.selectedTable];
 
     //Getting data to show the first time
-    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
+    this.fetchDataService.fetchData(this.production, this.tableName);
 
     this.dataSub = this.tableService.tableChanged.subscribe(
       newTable => {
@@ -57,7 +60,21 @@ export class DataGridComponent implements OnInit, OnDestroy {
   toggleState(value: boolean){
     this.selectedTable = 0;
     this.production = value;
-    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
+
+    if(this.production)
+      this.tableNames = this.prodTableNames;
+    else
+      this.tableNames = this.mockTablesNames;
+
+    this.tableName = this.tableNames[this.selectedTable];
+    this.fetchDataService.fetchData(this.production, this.tableName);
+  }
+
+  changeTable(index){
+    this.tableService.updatePage(1);
+    this.selectedTable = index;
+    this.tableName= this.tableNames[this.selectedTable]; 
+    this.fetchDataService.fetchData(this.production, this.tableName);
   }
 
   //Reset the values an switch to mock mode when an error ocurres
@@ -65,7 +82,7 @@ export class DataGridComponent implements OnInit, OnDestroy {
     this.tableService.setError();
     this.production = false;
     this.selectedTable = 0;
-    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
+    this.fetchDataService.fetchData(this.production, this.tableName);
   }
 
   ngOnDestroy(): void{

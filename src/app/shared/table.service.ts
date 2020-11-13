@@ -42,7 +42,6 @@ export class TableService {
 
     updateTable(table){
         this.table = table;
-        console.log(table)
         this.tableChanged.next(this.table);
     }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TableService } from 'src/app/table.service';
+import { TableService } from 'src/app/shared/table.service';
 
 @Component({
   selector: 'app-records-selector',

@@ -1,8 +1,8 @@
 import { Input, OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Table } from 'src/app/table.model';
-import { TableService } from 'src/app/table.service';
+import { Table } from 'src/app/shared/table.model';
+import { TableService } from 'src/app/shared/table.service';
 
 @Component({
   selector: 'app-table',

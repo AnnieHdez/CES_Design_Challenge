@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TableService } from 'src/app/table.service';
+import { TableService } from 'src/app/shared/table.service';
 
 @Component({
   selector: 'app-toggle',

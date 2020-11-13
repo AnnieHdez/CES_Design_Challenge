@@ -1,0 +1,22 @@
+{   
+    "columnsNames":["Player Name", "Age", "Country", "Gender", "Accuracy"],
+    "columnsTypes": ["string", "number", "string", "string", "percent"],
+    "columnsWidths": [25, 15, 25, 20, 15],
+   "data":[{"Player Name":"Lee Arsey","Age":27,"Country":"Indonesia","Gender":"Female","Accuracy":0.47},
+    {"Player Name":"Berty Pigram","Age":25,"Country":"China","Gender":"Female","Accuracy":0.3},
+    {"Player Name":"Kaylil Frohock","Age":37,"Country":"Indonesia","Gender":"Female","Accuracy":0.87},
+    {"Player Name":"Jeth McAnellye","Age":17,"Country":"Indonesia","Gender":"Male","Accuracy":0.14},
+    {"Player Name":"Curtice Mussotti","Age":16,"Country":"China","Gender":"Male","Accuracy":0.52},
+    {"Player Name":"Reba Jaques","Age":30,"Country":"Poland","Gender":"Female","Accuracy":0.56},
+    {"Player Name":"Raphaela Gordge","Age":25,"Country":"Macedonia","Gender":"Female","Accuracy":0.2},
+    {"Player Name":"Annie Sanday","Age":22,"Country":"China","Gender":"Female","Accuracy":0.55},
+    {"Player Name":"Farrand Ruste","Age":24,"Country":"Honduras","Gender":"Female","Accuracy":0.92},
+    {"Player Name":"Michel Olivia","Age":17,"Country":"Philippines","Gender":"Male","Accuracy":0.80},
+    {"Player Name":"Johny Jeandin","Age":40,"Country":"Portugal","Gender":"Male","Accuracy":0.99},
+    {"Player Name":"Camile Skivington","Age":31,"Country":"Estonia","Gender":"Female","Accuracy":0.4},
+    {"Player Name":"Dix Capenor","Age":39,"Country":"Bolivia","Gender":"Female","Accuracy":0.0},
+    {"Player Name":"Kirbee Reeks","Age":15,"Country":"China","Gender":"Female","Accuracy":0.93},
+    {"Player Name":"Land Yendall","Age":29,"Country":"Greece","Gender":"Male","Accuracy":0.26},
+    {"Player Name":"Reynold Barmby","Age":25,"Country":"Malaysia","Gender":"Male","Accuracy":0.6},
+    {"Player Name":"Edi Barmby","Age":39,"Country":"China","Gender":"Female","Accuracy":0.98}]
+}

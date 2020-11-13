@@ -1,3 +1,7 @@
 .addMargin{
     margin-top: 40px;
 }
+
+.custom-switch{
+    cursor: pointer;
+}
