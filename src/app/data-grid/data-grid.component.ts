@@ -73,11 +73,9 @@ export class DataGridComponent implements OnInit, OnDestroy {
     )
   }
 
-  //Toggle between production an mock states, reseting variables and loading the correct table
-  toggleState(){
-    this.tableService.updatePage(1);
+  toggleState(value: boolean){
     this.selectedTable = 0;
-    this.production = !this.production;
+    this.production = value;
     this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
   }
 

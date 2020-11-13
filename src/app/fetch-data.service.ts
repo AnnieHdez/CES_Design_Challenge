@@ -7,7 +7,7 @@ import { TableService } from './table.service';
 export class FetchDataService {
   constructor(private http: HttpClient, private tableService: TableService) {}
 
-  private dummyData = [{"title": "players"}, new Table(
+  private dummyData = [new Table(
                       ["Player Name", "Age", "Country", "Gender", "Accuracy"], ["string", "number", "string", "string", "percent"],
                        [30, 10, 20, 10, 10], 
                        [{"Player Name":"Lee Arsey","Age":27,"Country":"Indonesia","Gender":"Female","Accuracy":47},
@@ -28,7 +28,7 @@ export class FetchDataService {
                       {"Player Name":"Reynold Barmby","Age":25,"Country":"Malaysia","Gender":"Male","Accuracy":6},
                       {"Player Name":"Edi Barmby","Age":39,"Country":"China","Gender":"Female","Accuracy":98}]),
 
-          {"title": "dummy"},new Table(["userId", "jobTitleName", "firstName","lastName", "preferredFullName", "employeeCode","region", "phoneNumber", "emailAddress"], ["string", "string", "string","string", "string", "string","string", "string", "string"], [20, 20, 40, 20, 20, 40,20, 20, 40],[
+          new Table(["userId", "jobTitleName", "firstName","lastName", "preferredFullName", "employeeCode","region", "phoneNumber", "emailAddress"], ["string", "string", "string","string", "string", "string","string", "string", "string"], [20, 20, 40, 20, 20, 40,20, 20, 40],[
           {"userId":"rirani","jobTitleName":"Developer","firstName":"Romin","lastName":"Irani","preferredFullName":"Romin Irani","employeeCode":"E1","region":"CA","phoneNumber":"408-1234567","emailAddress":"romin.k.irani@gmail.com"},
           {"userId":"nirani","jobTitleName":"Developer","firstName":"Neil","lastName":"Irani","preferredFullName":"Neil Irani","employeeCode":"E2","region":"CA","phoneNumber":"408-1111111","emailAddress":"neilrirani@gmail.com"},
           {"userId":"thanks","jobTitleName":"Program Directory","firstName":"Tom","lastName":"Hanks","preferredFullName":"Tom Hanks","employeeCode":"E3","region":"CA","phoneNumber":"408-2222222","emailAddress":"tomhanks@gmail.com"}
@@ -52,7 +52,7 @@ export class FetchDataService {
           );
         }
       else{
-          this.tableService.updateTable(this.dummyData[index][1]);
+          this.tableService.updateTable(this.dummyData[index]);
       }
   }
 }

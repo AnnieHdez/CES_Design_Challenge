@@ -1,14 +1,5 @@
 <div *ngIf="collection">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 addMargin">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitches" (click) = "toggleState()" [checked]='production'>
-                    <label class="custom-control-label" for="customSwitches" ><h5  [innerHTML]="production?'Test Mode':'Production Mode'"></h5></label>
-                  </div>
-            </div>
-        </div>
-    </div>
+   <app-toggle (changeState)="toggleState($event)"></app-toggle>
     <div class="container">
         <div class="row">
             <ul class="nav nav-tabs">
