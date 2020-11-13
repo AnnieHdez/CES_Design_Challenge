@@ -2,8 +2,13 @@
     <div class="row">
         <div class="col-xs-12 addMargin">
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitches" (click) = "toggleState()" [checked]='production'>
-                <label class="custom-control-label" for="customSwitches" ><h5  [innerHTML]="production?'Test Mode':'Production Mode'"></h5></label>
+                <input type="checkbox" class="custom-control-input" 
+                id="customSwitches" 
+                (click) = "toggleState()" 
+                [checked]='production'>
+                <label class="custom-control-label" for="customSwitches" >
+                    <h5  [innerHTML]="production? 'Production Mode':'Test Mode'"></h5>
+                </label>
                 </div>
         </div>
     </div>

@@ -1,0 +1,9 @@
+<div class="addMargin container" style="margin-bottom: 20px;">
+    <div class="row text-right d-flex justify-content-end">
+        <div class="col-xs-12">
+            <select class="custom-select" name="numberOfRecords" id="numberOfRecords" (change) = "changeValue($event)">
+                <option *ngFor="let val of numberOfRecords" [value]="val">{{ val }} items per page</option>
+            </select>
+        </div>
+    </div>
+</div>

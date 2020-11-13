@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" *ngFor="let table of tableNames, let i = index">
+            <a class="nav-link" [ngClass]='{active: selectedTable == i}' 
+            (click)="changeTable(i)">
+            {{ table | titlecase }}
+            </a>
+            </li>
+        </ul>
+    </div>
+</div>
