@@ -9,37 +9,39 @@ import { TableService } from '../table.service';
   styleUrls: ['./data-grid.component.css']
 })
 export class DataGridComponent implements OnInit, OnDestroy {
-  @Input() tableNames: string[] = ["table1","table2"];
+  @Input() tableNames: string[] = ["products","employees"];
   @Input() numberOfRecords: number[]  = [5,10,15];
-
-  numberOfColumns: number;
-  p: number;
-  recordsPerColum:number;
 
   private pageChangeSub: Subscription;
   private recordsChangeSub: Subscription;
   private dataSub: Subscription;
   private errorSub: Subscription;
+  private tableNameSub: Subscription;
 
-  tableName: string;
-  selectedTable: number = 0;
-
+  //Data and metadata from the table
   collection : Object[];
   columnsNames: string[];
   columnsTypes: string[];
   columnsWidths: number[];
 
-  error: boolean = false;
-
-  production = true;
+  tableName: string;
+  selectedTable: number;
+  numberOfColumns: number;
+  p: number;
+  recordsPerColum:number;
+  error: boolean;
+  production: boolean;
 
   constructor(private fetchDataService: FetchDataService, private tableService: TableService) { }
 
-
   ngOnInit(): void {
+    this.selectedTable = 0;
+    this.error = false;
+    this.production = true;
     this.tableName= this.tableNames[this.selectedTable];
 
-    this.fetchDataService.fetchData(this.production, this.tableName);
+    //Getting data to show the first time
+    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
 
     this.dataSub = this.tableService.tableChanged.subscribe(
       newTable => {
@@ -71,12 +73,15 @@ export class DataGridComponent implements OnInit, OnDestroy {
     )
   }
 
+  //Toggle between production an mock states, reseting variables and loading the correct table
   toggleState(){
     this.tableService.updatePage(1);
+    this.selectedTable = 0;
     this.production = !this.production;
-    this.fetchDataService.fetchData(this.production, this.tableName);
+    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
   }
 
+  //Change the number of records per page to show
   changeValue(option){
     console.log(this.recordsPerColum);
     this.recordsPerColum = option.target.value;
@@ -84,22 +89,26 @@ export class DataGridComponent implements OnInit, OnDestroy {
     this.tableService.updatePage(1);
   }
 
+  //Update the selected page in the pagination
   onPageChange(page: number){
     this.p = page;
     this.tableService.updatePage(page);
   }
 
+  //Load the corresponding table when selected
   changeTable(index){
     this.tableService.updatePage(1);
     this.selectedTable = index;
     this.tableName= this.tableNames[this.selectedTable];
-    this.fetchDataService.fetchData(this.production, this.tableName);
+    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
   }
 
+  //Reset the values an switch to mock mode when an error ocurres
   onHandleError(){
     this.tableService.setError();
     this.production = false;
-    this.fetchDataService.fetchData(this.production, this.tableNames[0]);
+    this.selectedTable = 0;
+    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
   }
 
   ngOnDestroy(): void{

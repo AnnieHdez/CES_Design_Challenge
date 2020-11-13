@@ -46,7 +46,7 @@ export class TableService {
         this.tableChanged.next(this.table);
     }
 
-    throwError(error){
+    throwError(){
       this.error = true;
       this.errorChanged.next(this.error);
     }

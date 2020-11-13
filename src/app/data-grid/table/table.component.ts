@@ -16,9 +16,10 @@ export class TableComponent implements OnInit, OnDestroy {
   @Input() columnsTypes: string[] = [];
   @Input() columnsWidths: number[] = [];
 
-  numberOfColumns: number;
   private pageChangeSub: Subscription;
   private recordsChangeSub: Subscription;
+
+  numberOfColumns: number;
   p : number;
   recordsPerColum: number;
   

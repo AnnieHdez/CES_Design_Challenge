@@ -8,6 +8,7 @@ import { DataGridComponent } from './data-grid/data-grid.component';
 import { TableComponent } from './data-grid/table/table.component';
 import { LoadingSpinerComponent } from './loading-spinner/loading-spinner.component';
 import { AlertComponent } from './alert/alert.component';
+import { ToggleComponent } from './data-grid/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AlertComponent } from './alert/alert.component';
     TableComponent,
     DataGridComponent,
     LoadingSpinerComponent,
-    AlertComponent
+    AlertComponent,
+    ToggleComponent
   ],
   imports: [
     BrowserModule,
