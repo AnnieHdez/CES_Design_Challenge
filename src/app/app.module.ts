@@ -9,6 +9,9 @@ import { TableComponent } from './data-grid/table/table.component';
 import { LoadingSpinerComponent } from './loading-spinner/loading-spinner.component';
 import { AlertComponent } from './alert/alert.component';
 import { ToggleComponent } from './data-grid/toggle/toggle.component';
+import { TablesTitlesComponent } from './data-grid/tables-titles/tables-titles.component';
+import { PaginatorComponent } from './data-grid/paginator/paginator.component';
+import { RecordsSelectorComponent } from './data-grid/records-selector/records-selector.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ToggleComponent } from './data-grid/toggle/toggle.component';
     DataGridComponent,
     LoadingSpinerComponent,
     AlertComponent,
-    ToggleComponent
+    ToggleComponent,
+    TablesTitlesComponent,
+    PaginatorComponent,
+    RecordsSelectorComponent
   ],
   imports: [
     BrowserModule,

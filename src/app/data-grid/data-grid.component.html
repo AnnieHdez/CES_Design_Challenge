@@ -1,43 +1,20 @@
 <div *ngIf="collection">
-   <app-toggle (changeState)="toggleState($event)"></app-toggle>
-    <div class="container">
-        <div class="row">
-            <ul class="nav nav-tabs">
-                <li class="nav-item" *ngFor="let table of tableNames, let i = index">
-                <a class="nav-link" [ngClass]='{active: selectedTable == i}' (click)="changeTable(i)">{{ table | titlecase }}</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <app-toggle (changeState)="toggleState($event)"></app-toggle>
+    <app-tables-titles [tableNames]="tableNames" [production]="production"></app-tables-titles> 
     <app-table [tableName]='tableName'
             [collection]='collection'
             [columnsNames] = 'columnsNames'
             [columnsTypes] = 'columnsTypes'
             [columnsWidths] = 'columnsWidths'></app-table>
-    <div class="container">
-        <div class="row text-center">
-            <div id="pagination" class="w-100">
-                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls> 
-            </div>
-        </div>  
-    </div>
-    <div class="addMargin container" style="margin-bottom: 20px;">
-        <div class="row text-right d-flex justify-content-end">
-            <div class="col-xs-12">
-                <select class="custom-select" name="numberOfRecords" id="numberOfRecords" (change) = "changeValue($event)">
-                    <option *ngFor="let val of numberOfRecords" [value]="val">{{ val }} items per page</option>
-                </select>
-            </div>
-        </div>
-    </div>
+    <app-paginator></app-paginator>
+    <app-records-selector [numberOfRecords]="numberOfRecords"></app-records-selector>
 </div>
-<div class="row  w-100">
-    <div class="col-xs-12 w-100">
-        <div *ngIf="!collection && !error" class = " w-100" style="text-align: center;">
-            <app-loading-spinner></app-loading-spinner>
-        </div>
-    </div>
+<div *ngIf="!collection && !error" class = " w-100" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
 </div>
 
-<app-alert *ngIf="error" message ="An error has ocurred while loading the data." (close)="onHandleError()"></app-alert>
+<app-alert *ngIf="error" 
+            message ="An error has ocurred while loading the data." 
+            (close)="onHandleError()">
+</app-alert>
 

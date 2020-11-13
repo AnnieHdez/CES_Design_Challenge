@@ -12,11 +12,8 @@ export class DataGridComponent implements OnInit, OnDestroy {
   @Input() tableNames: string[] = ["products","employees"];
   @Input() numberOfRecords: number[]  = [5,10,15];
 
-  private pageChangeSub: Subscription;
-  private recordsChangeSub: Subscription;
   private dataSub: Subscription;
   private errorSub: Subscription;
-  private tableNameSub: Subscription;
 
   //Data and metadata from the table
   collection : Object[];
@@ -27,8 +24,6 @@ export class DataGridComponent implements OnInit, OnDestroy {
   tableName: string;
   selectedTable: number;
   numberOfColumns: number;
-  p: number;
-  recordsPerColum:number;
   error: boolean;
   production: boolean;
 
@@ -52,19 +47,6 @@ export class DataGridComponent implements OnInit, OnDestroy {
       },
     );
 
-    this.tableService.updateRecord(this.numberOfRecords[0])
-    this.recordsChangeSub = this.tableService.recordsPerColumChanged.subscribe(
-      (newRecords)=>{
-        this.recordsPerColum = newRecords;
-      }
-    );
-
-    this.pageChangeSub = this.tableService.changedPage.subscribe(
-      (newPage)=>{
-        this.p = newPage;
-      }
-    );
-
     this.errorSub = this.tableService.errorChanged.subscribe(
       (error) => {
         this.error = error;
@@ -72,32 +54,9 @@ export class DataGridComponent implements OnInit, OnDestroy {
 
     )
   }
-
   toggleState(value: boolean){
     this.selectedTable = 0;
     this.production = value;
-    this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
-  }
-
-  //Change the number of records per page to show
-  changeValue(option){
-    console.log(this.recordsPerColum);
-    this.recordsPerColum = option.target.value;
-    this.tableService.updateRecord(this.recordsPerColum);
-    this.tableService.updatePage(1);
-  }
-
-  //Update the selected page in the pagination
-  onPageChange(page: number){
-    this.p = page;
-    this.tableService.updatePage(page);
-  }
-
-  //Load the corresponding table when selected
-  changeTable(index){
-    this.tableService.updatePage(1);
-    this.selectedTable = index;
-    this.tableName= this.tableNames[this.selectedTable];
     this.fetchDataService.fetchData(this.production, this.tableName, this.selectedTable);
   }
 
@@ -110,8 +69,6 @@ export class DataGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void{
-    this.pageChangeSub.unsubscribe();
-    this.recordsChangeSub.unsubscribe();
     this.dataSub.unsubscribe();
     this.errorSub.unsubscribe();
   }
